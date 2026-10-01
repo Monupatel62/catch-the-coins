@@ -1,12 +1,11 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <urlset
   xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"
 >
-  <!-- ── Main game page ──────────────────────────────────────────────────── -->
   <url>
     <loc>https://catchthecoins.netlify.app/</loc>
-    <lastmod>2025-09-17</lastmod>
+    <lastmod>2026-10-01</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
     <image:image>
@@ -16,125 +15,136 @@
     </image:image>
   </url>
 
-  <!-- ── About / How to Play page ────────────────────────────────────────── -->
-  <url>
-    <loc>https://catchthecoins.netlify.app/about.html</loc>
-    <lastmod>2025-09-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <!-- ── Blog index ───────────────────────────────────────────────────────── -->
   <url>
     <loc>https://catchthecoins.netlify.app/blog/</loc>
-    <lastmod>2025-09-10</lastmod>
+    <lastmod>2026-10-01</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
 
-  <!-- ── Blog post 1 ──────────────────────────────────────────────────────── -->
   <url>
-    <loc>https://catchthecoins.netlify.app/blog/how-to-play-catch-the-coin.html</loc>
-    <lastmod>2025-09-10</lastmod>
+    <loc>https://catchthecoins.netlify.app/about.html</loc>
+    <lastmod>2026-10-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
 
-  <!-- ── Blog post 2 ──────────────────────────────────────────────────────── -->
   <url>
-    <loc>https://catchthecoins.netlify.app/blog/how-to-get-high-score-catch-the-coin.html</loc>
-    <lastmod>2025-09-10</lastmod>
+    <loc>https://catchthecoins.netlify.app/blog/are-browser-games-safe.html</loc>
+    <lastmod>2026-10-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
 
-  <!-- ── Blog post 3 ──────────────────────────────────────────────────────── -->
-  <url>
-    <loc>https://catchthecoins.netlify.app/blog/coin-types-catch-the-coin.html</loc>
-    <lastmod>2025-09-10</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-
-  <!-- ── Blog post 4 ──────────────────────────────────────────────────────── -->
   <url>
     <loc>https://catchthecoins.netlify.app/blog/best-free-browser-arcade-games.html</loc>
-    <lastmod>2025-09-10</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-
-  <!-- ── Blog post 5 ──────────────────────────────────────────────────────── -->
-  <url>
-    <loc>https://catchthecoins.netlify.app/blog/how-to-improve-reflexes-arcade-games.html</loc>
-    <lastmod>2025-09-10</lastmod>
+    <lastmod>2026-09-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
 
-  <!-- ── Blog post 6 ──────────────────────────────────────────────────────── -->
   <url>
     <loc>https://catchthecoins.netlify.app/blog/browser-games-vs-app-games.html</loc>
-    <lastmod>2025-09-10</lastmod>
+    <lastmod>2026-09-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
 
-  <!-- ── Blog post 7 ──────────────────────────────────────────────────────── -->
   <url>
-    <loc>https://catchthecoins.netlify.app/blog/why-high-score-games-are-addictive.html</loc>
-    <lastmod>2025-09-10</lastmod>
+    <loc>https://catchthecoins.netlify.app/blog/coin-types-catch-the-coin.html</loc>
+    <lastmod>2026-09-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
 
-  <!-- ── Blog post 8 ──────────────────────────────────────────────────────── -->
   <url>
-    <loc>https://catchthecoins.netlify.app/blog/why-casual-games-most-played.html</loc>
-    <lastmod>2025-09-15</lastmod>
+    <loc>https://catchthecoins.netlify.app/blog/combo-multiplier-explained.html</loc>
+    <lastmod>2026-10-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
 
-  <!-- ── Blog post 9 ──────────────────────────────────────────────────────── -->
   <url>
-    <loc>https://catchthecoins.netlify.app/blog/how-to-play-arcade-games-online.html</loc>
-    <lastmod>2025-09-16</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
-  </url>
-
-  <!-- ── Blog post 10 ─────────────────────────────────────────────────────── -->
-  <url>
-    <loc>https://catchthecoins.netlify.app/blog/how-to-play-online-games-better.html</loc>
-    <lastmod>2025-09-17</lastmod>
+    <loc>https://catchthecoins.netlify.app/blog/how-catch-the-coin-was-built.html</loc>
+    <lastmod>2026-10-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
 
-  <!-- ── Blog post 11 ─────────────────────────────────────────────────────── -->
+  <url>
+    <loc>https://catchthecoins.netlify.app/blog/how-to-get-high-score-catch-the-coin.html</loc>
+    <lastmod>2026-09-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://catchthecoins.netlify.app/blog/how-to-improve-reflexes-arcade-games.html</loc>
+    <lastmod>2026-09-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
   <url>
     <loc>https://catchthecoins.netlify.app/blog/how-to-play-arcade-games-mobile.html</loc>
-    <lastmod>2025-09-18</lastmod>
+    <lastmod>2026-09-20</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
+    <priority>0.8</priority>
   </url>
 
-  <!-- ── Privacy Policy ───────────────────────────────────────────────────── -->
+  <url>
+    <loc>https://catchthecoins.netlify.app/blog/how-to-play-arcade-games-online.html</loc>
+    <lastmod>2026-09-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://catchthecoins.netlify.app/blog/how-to-play-catch-the-coin.html</loc>
+    <lastmod>2026-09-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://catchthecoins.netlify.app/blog/how-to-play-online-games-better.html</loc>
+    <lastmod>2026-09-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://catchthecoins.netlify.app/blog/keyboard-vs-touch-controls-arcade-games.html</loc>
+    <lastmod>2026-10-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://catchthecoins.netlify.app/blog/why-casual-games-most-played.html</loc>
+    <lastmod>2026-09-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://catchthecoins.netlify.app/blog/why-high-score-games-are-addictive.html</loc>
+    <lastmod>2026-09-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
   <url>
     <loc>https://catchthecoins.netlify.app/privacy.html</loc>
-    <lastmod>2025-09-17</lastmod>
+    <lastmod>2026-09-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.4</priority>
   </url>
 
-  <!-- ── Terms of Use ─────────────────────────────────────────────────────── -->
   <url>
     <loc>https://catchthecoins.netlify.app/terms.html</loc>
-    <lastmod>2025-09-17</lastmod>
+    <lastmod>2026-09-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.4</priority>
   </url>
-
-  <!-- NOTE: 404.html intentionally excluded — carries meta noindex -->
 </urlset>
