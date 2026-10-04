@@ -3,5 +3,6 @@ Allow: /
 
 # Do not index the 404 error page
 Disallow: /404.html
+Disallow: /blog/.versions/
 
 Sitemap: https://catchthecoins.netlify.app/sitemap.xml
