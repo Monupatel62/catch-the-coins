@@ -257,7 +257,6 @@ canvas {
 .badge-instant { background: rgba(250,204,21,0.12); color: #facc15; border: 1px solid rgba(250,204,21,0.3); }
 .badge-no-dl   { background: rgba(251,146,60,0.12); color: #fb923c; border: 1px solid rgba(251,146,60,0.3); }
 .badge-mobile  { background: rgba(129,140,248,0.12); color: #818cf8; border: 1px solid rgba(129,140,248,0.3); }
-.badge-offline { background: rgba(34,211,238,0.12); color: #22d3ee; border: 1px solid rgba(34,211,238,0.3); }
 
 /* ═══════════════════════════════════════════════════════════════════════════
    FEATURES SECTION
