@@ -81,8 +81,7 @@ export function triggerGameOverAd(): void {
 
   setTimeout(() => {
     try {
-      // ── Monetag / 5gvci push-notification ad trigger ──────────────────
-      // Their SW-based ad uses the global _mntg object after SW registers.
+      // ── Configured Monetag integrations ───────────────────────────────
       const w = window as any;
 
       if (typeof w._mntg?.showInterstitial === "function") {
@@ -100,11 +99,6 @@ export function triggerGameOverAd(): void {
       if (typeof w.adpushup?.triggerAd === "function") {
         w.adpushup.triggerAd();
       }
-
-      // ── Generic fallbacks used by various ad networks ─────────────────
-      if (typeof w.showAd === "function")          { w.showAd(); }
-      if (typeof w.__adP?.show === "function")     { w.__adP.show(); }
-      if (typeof w.monetag?.show === "function")   { w.monetag.show(); }
 
     } catch {
       // Silently ignore — ad network API unavailable
