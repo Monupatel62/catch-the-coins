@@ -81,25 +81,9 @@ export function triggerGameOverAd(): void {
 
   setTimeout(() => {
     try {
-      // ── Configured Monetag integrations ───────────────────────────────
-      const w = window as any;
-
-      if (typeof w._mntg?.showInterstitial === "function") {
-        w._mntg.showInterstitial();
-      }
-      if (typeof w._mntg?.showVignette === "function") {
-        w._mntg.showVignette();
-      }
-
-      // ── Monetag / quge5 Multitag trigger ─────────────────────────────
-      // Multitag auto-fires on load; on SPA navigation call reinit if exposed
-      if (typeof w.__adp_reinit === "function") {
-        w.__adp_reinit();
-      }
-      if (typeof w.adpushup?.triggerAd === "function") {
-        w.adpushup.triggerAd();
-      }
-
+      // Monetag MultiTag is initialized from the official header tag.
+      // Do not call undocumented globals here; repeated manual triggers can
+      // suppress or distort Monetag's own frequency/optimization logic.
     } catch {
       // Silently ignore — ad network API unavailable
     }
