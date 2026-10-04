@@ -1,7 +1,6 @@
 import eslint from "@eslint/js";
 import tseslint from "typescript-eslint";
-import eslintPluginPrettier from "eslint-plugin-prettier";
-import prettierConfig from "eslint-config-prettier";
+import eslintConfigPrettier from "eslint-config-prettier";
 
 export default tseslint.config(
   {
@@ -10,12 +9,15 @@ export default tseslint.config(
   eslint.configs.recommended,
   ...tseslint.configs.recommended,
   {
-    plugins: {
-      prettier: eslintPluginPrettier,
-    },
-    rules: {
-      "prettier/prettier": "error",
+    languageOptions: {
+      globals: {
+        console: "readonly",
+        process: "readonly",
+        Buffer: "readonly",
+        __dirname: "readonly",
+        __filename: "readonly",
+      },
     },
   },
-  prettierConfig,
+  eslintConfigPrettier,
 );
