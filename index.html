@@ -92,11 +92,10 @@
       "isAccessibleForFree": true,
       "isFamilyFriendly": true,
       "datePublished": "2025-08-08",
-      "dateModified": "2025-09-10",
+      "dateModified": "2026-10-04",
       "author": { "@type": "Person", "name": "Monupatel62", "url": "https://github.com/Monupatel62" },
       "publisher": { "@type": "Person", "name": "Monupatel62", "url": "https://github.com/Monupatel62" },
-      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD", "availability": "https://schema.org/InStock", "url": "https://catchthecoins.netlify.app/" },
-      "aggregateRating": { "@type": "AggregateRating", "ratingValue": "4.8", "ratingCount": "124", "bestRating": "5", "worstRating": "1" }
+      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD", "availability": "https://schema.org/InStock", "url": "https://catchthecoins.netlify.app/" }
     }
     </script>
 
@@ -113,8 +112,7 @@
       "inLanguage": "en",
       "isAccessibleForFree": true,
       "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD", "availability": "https://schema.org/InStock" },
-      "author": { "@type": "Person", "name": "Monupatel62", "url": "https://github.com/Monupatel62" },
-      "aggregateRating": { "@type": "AggregateRating", "ratingValue": "4.8", "ratingCount": "124", "bestRating": "5", "worstRating": "1" }
+      "author": { "@type": "Person", "name": "Monupatel62", "url": "https://github.com/Monupatel62" }
     }
     </script>
 
@@ -129,7 +127,7 @@
         { "@type": "Question", "name": "Does Catch the Coin work on mobile phones?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. Catch the Coin fully supports touch controls on smartphones and tablets. Tap anywhere on screen to move the basket, or use the on-screen D-pad. The game enters fullscreen on mobile for the best experience." } },
         { "@type": "Question", "name": "How many difficulty levels does Catch the Coin have?", "acceptedAnswer": { "@type": "Answer", "text": "Catch the Coin has 3 difficulty stages that progress automatically during a 60-second game. Coins fall faster each stage." } },
         { "@type": "Question", "name": "How do I get a high score in Catch the Coin?", "acceptedAnswer": { "@type": "Answer", "text": "Build a combo multiplier by catching coins consecutively without missing — up to ×4. At ×4, a gold coin gives 40 points instead of 10. Catch bonus orange star coins (25 pts). Stay alive through all 3 stages." } },
-        { "@type": "Question", "name": "Can I install Catch the Coin on my phone?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. Catch the Coin is a Progressive Web App (PWA). On Android, tap Install App in the menu. On iPhone Safari, tap Share then Add to Home Screen. Once installed, you can play offline from your home screen." } },
+        { "@type": "Question", "name": "Can I install Catch the Coin on my phone?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. Catch the Coin is a Progressive Web App (PWA). On Android, use the browser's Install App option. On iPhone Safari, use Share → Add to Home Screen. Availability of offline play depends on the browser and service-worker cache." } },
         { "@type": "Question", "name": "Is Catch the Coin a coin catcher or coin collection game?", "acceptedAnswer": { "@type": "Answer", "text": "Yes, Catch the Coin is a classic coin catcher and coin collection game. You move a basket to catch falling coins, collect as many as possible, and build your score. It is a lightweight HTML5 arcade game that runs in any browser." } },
         { "@type": "Question", "name": "Do I need to download anything to play Catch the Coin?", "acceptedAnswer": { "@type": "Answer", "text": "No. Catch the Coin is one of the best no download games — there is nothing to install. It runs instantly in your browser on desktop, phone, or tablet, with no account or login required." } },
         { "@type": "Question", "name": "What is the combo multiplier and how does it work?", "acceptedAnswer": { "@type": "Answer", "text": "The combo multiplier rewards you for catching coins consecutively without missing. Your multiplier climbs from x1 to a maximum of x4 — at x4 a gold coin is worth 40 points instead of 10. Miss a coin and your combo resets to x1." } },
@@ -215,7 +213,6 @@
         <span class="badge badge-instant">⚡ Instant Play</span>
         <span class="badge badge-no-dl">📵 No Download</span>
         <span class="badge badge-mobile">📱 Mobile Ready</span>
-        <span class="badge badge-offline">📶 Works Offline</span>
       </div>
 
       <!-- ── Feature cards ── -->
@@ -318,7 +315,7 @@
 
           <details class="faq-item">
             <summary>Can I install Catch the Coin on my phone?</summary>
-            <p>Yes! Catch the Coin is a Progressive Web App (PWA). On Android: tap "Install App" in the menu button. On iPhone Safari: tap Share → Add to Home Screen. Once installed, you can play offline from your home screen.</p>
+            <p>Yes! Catch the Coin is a Progressive Web App (PWA). On Android, use the browser's "Install App" option. On iPhone Safari, use Share → Add to Home Screen.</p>
           </details>
 
           <details class="faq-item">
@@ -386,40 +383,5 @@
       }
     </script>
 
-    <!-- Ad blocker detection — shows polite message if ads are blocked -->
-    <script>
-      window.addEventListener('load', function() {
-        setTimeout(function() {
-          // Check if ad script loaded by testing for a known global it sets
-          var adLoaded = typeof window.__adp !== 'undefined'
-            || typeof window._mntg !== 'undefined'
-            || document.querySelector('iframe[src*="quge5"]')
-            || document.querySelector('iframe[src*="5gvci"]');
-
-          if (!adLoaded && !document.body.classList.contains('game-playing')) {
-            var msg = document.createElement('div');
-            msg.id = 'adblock-msg';
-            msg.innerHTML =
-              '<span>&#127918; This game is free because of ads.</span>' +
-              '<span>Please disable your ad blocker to support it.</span>' +
-              '<button onclick="document.getElementById(\'adblock-msg\').remove()" ' +
-              'style="background:transparent;border:1px solid #4ade80;color:#4ade80;' +
-              'padding:4px 12px;border-radius:12px;cursor:pointer;font-size:0.75rem;">OK</button>';
-            msg.style.cssText =
-              'position:fixed;bottom:60px;left:50%;transform:translateX(-50%);' +
-              'background:rgba(10,8,24,0.95);border:1px solid rgba(74,222,128,0.3);' +
-              'border-radius:10px;padding:10px 16px;display:flex;align-items:center;' +
-              'gap:12px;font-size:0.78rem;color:#86efac;z-index:9999;' +
-              'font-family:Arial,sans-serif;max-width:90vw;flex-wrap:wrap;' +
-              'box-shadow:0 4px 20px rgba(0,0,0,0.5);';
-            document.body.appendChild(msg);
-            setTimeout(function() {
-              var el = document.getElementById('adblock-msg');
-              if (el) el.remove();
-            }, 8000);
-          }
-        }, 3000);
-      });
-    </script>
   </body>
 </html>
