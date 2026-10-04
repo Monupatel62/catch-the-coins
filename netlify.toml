@@ -15,18 +15,13 @@
   status = 200
   force = true
 
-# ── SPA fallback ───────────────────────────────────────────────────────────────
-# Serve index.html for all routes the SPA handles client-side.
-# The 404 rule must come FIRST so unmatched paths get the proper 404 page.
+# ── Custom 404 ────────────────────────────────────────────────────────────────
+# Do not use a catch-all SPA redirect: unknown URLs should return a real 404
+# instead of returning the homepage with HTTP 200.
 [[redirects]]
   from = "/404"
   to = "/404.html"
   status = 404
-
-[[redirects]]
-  from = "/*"
-  to = "/index.html"
-  status = 200
 
 # ── Security & cache headers on all responses ──────────────────────────────────
 [[headers]]
