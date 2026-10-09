@@ -324,11 +324,19 @@ export class MenuScene extends Scene {
       align: "center",
     });
 
-    // Miss 3 coins = game over hint
-    renderer.fillText("Miss 3 coins → Game Over  |  60 second timer  |  3 stages",
+    // Current survival rules: five hearts, one heart lost per ten misses,
+    // and Game Over at fifty missed coins. The timer only controls the first
+    // sixty seconds of difficulty progression; it does not end the run.
+    renderer.fillText("5 hearts  |  -1 heart per 10 missed coins  |  Game Over at 50 misses",
       GAME_WIDTH / 2, touchY + 20, {
-        color: "#475569",
+        color: "#94a3b8",
         font: "12px Arial",
+        align: "center",
+      });
+    renderer.fillText("3 difficulty stages in the first 60 seconds; then peak speed",
+      GAME_WIDTH / 2, touchY + 36, {
+        color: "#64748b",
+        font: "11px Arial",
         align: "center",
       });
   }
