@@ -220,10 +220,7 @@
 
         <h2>The Goal</h2>
         <p>
-          You have <strong>60 seconds</strong> to catch as many coins as possible. Coins fall from
-          the top of the screen at increasing speeds. Move your basket left and right to catch them
-          before they reach the ground. You have <strong>3 lives</strong> — each missed coin costs
-          one life. Lose all 3 and the game ends early.
+          Catch as many coins as possible while the difficulty increases. You start with <strong>5 hearts</strong>; every 10 missed coins removes one heart. <strong>Game Over occurs at 50 missed coins.</strong> Coins fall from the top at increasing speeds, so move your basket left and right to catch them before they reach the ground. The timer counts down during the first 60 seconds, but the game continues at peak speed after it reaches zero.
         </p>
         <p>
           Your final score is the total points accumulated across all 3 difficulty stages. The game
@@ -288,12 +285,12 @@
 
         <h2>Difficulty Stages</h2>
         <p>
-          The game has 3 difficulty stages that progress automatically during the 60-second session:
+          The game progresses through 3 difficulty stages during the first 60 seconds. Stage 3 continues at peak speed after the timer reaches zero:
         </p>
         <ul>
           <li><strong>Stage 1 (0–20 seconds):</strong> Coins spawn every 1.2 seconds at 180 px/s. Good for building your combo.</li>
           <li><strong>Stage 2 (20–40 seconds):</strong> Coins spawn every 0.95 seconds at 220 px/s. Slightly faster — stay focused.</li>
-          <li><strong>Stage 3 (40–60 seconds):</strong> Coins spawn every 0.7 seconds at 260 px/s. Maximum intensity — reactions must be sharp.</li>
+          <li><strong>Stage 3 (40 seconds onward):</strong> Coins spawn every 0.7 seconds at 260 px/s. Maximum intensity — reactions must be sharp, and this speed continues until 50 coins are missed.</li>
         </ul>
         <p>
           A stage announcement appears on screen when each new stage begins. This is your cue to
@@ -302,14 +299,10 @@
 
         <h2>Lives System</h2>
         <p>
-          You start each game with <strong>3 lives</strong> (shown as hearts ♥ in the top-right
-          HUD). Each coin that reaches the ground without being caught costs one life. Lose all 3
-          lives before the 60 seconds are up and the game ends with a "Out of Lives!" result
-          instead of "Time's Up!".
+          You start each game with <strong>5 hearts</strong> (shown in the top-right HUD). Every 10 missed coins removes one heart: 10 misses leaves 4 hearts, 20 leaves 3, 30 leaves 2, and 40 leaves 1. At <strong>50 missed coins</strong>, all hearts are gone and Game Over appears. The timer reaching zero does not end the run; gameplay continues at peak speed until the 50-miss limit is reached.
         </p>
         <p>
-          Lives do not regenerate during the game — every miss matters. In Stage 3, coins fall
-          rapidly so even experienced players need to stay alert.
+          Hearts do not regenerate during the game — every missed coin counts toward the 50-miss limit. In Stage 3, coins fall rapidly, so even experienced players need to stay alert.
         </p>
 
         <h2>HUD — Reading the Screen</h2>
@@ -325,9 +318,7 @@
 
         <h2>Game Over Screen</h2>
         <p>
-          When the timer reaches zero (or you lose all lives), the game over screen shows your
-          final stats: total score, coins caught, coins missed, accuracy percentage, max combo,
-          and time survived. If you set a new personal high score, a trophy badge appears.
+          When you miss 50 coins, the Game Over screen shows your final stats: total score, coins caught, coins missed, accuracy percentage, max combo, and time survived. The timer reaching zero alone does not end the game. If you set a new personal high score, a trophy badge appears.
         </p>
         <p>
           To play again: tap <strong>Play Again</strong>, press <strong>Enter</strong>,
