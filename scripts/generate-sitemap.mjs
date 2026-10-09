@@ -4,7 +4,7 @@
  * Auto-generates public/sitemap.xml by scanning public/ for HTML pages.
  *
  * - Reads each page's <link rel="canonical"> to get the correct URL.
- * - Derives <lastmod> from the file's last-modified time.
+ * - Prefers explicit dateModified/datePublished metadata; falls back to file mtime.
  * - Skips 404.html and any page carrying a `noindex` robots meta tag.
  * - Assigns priority / changefreq by page type.
  *
@@ -41,8 +41,13 @@ function isNoindex(html) {
   return m ? /noindex/i.test(m[1]) : false;
 }
 
-/** ISO date (YYYY-MM-DD) of a file's last modification. */
-function lastmodOf(filePath) {
+/** Prefer a page's declared content date over checkout-time filesystem mtimes. */
+function lastmodOf(filePath, html = '') {
+  const metadataDate =
+    html.match(/"dateModified"\s*:\s*"([0-9]{4}-[0-9]{2}-[0-9]{2})"/i)?.[1] ??
+    html.match(/<time[^>]*datetime=["']([0-9]{4}-[0-9]{2}-[0-9]{2})["']/i)?.[1] ??
+    html.match(/"datePublished"\s*:\s*"([0-9]{4}-[0-9]{2}-[0-9]{2})"/i)?.[1];
+  if (metadataDate) return metadataDate;
   return statSync(filePath).mtime.toISOString().slice(0, 10);
 }
 
@@ -95,7 +100,7 @@ function buildEntry({ abs, rel }) {
 
   const urlPath = loc.replace(BASE_URL, '') || '/';
   const { priority, changefreq } = rankOf(urlPath);
-  const lastmod = lastmodOf(abs);
+  const lastmod = lastmodOf(abs, html);
 
   // The homepage can carry an image entry.
   const imageBlock =
@@ -140,7 +145,8 @@ const ROOT_INDEX = resolve(__dirname, '../index.html');
 function buildHomeEntry() {
   let lastmod;
   try {
-    lastmod = lastmodOf(ROOT_INDEX);
+    const html = readFileSync(ROOT_INDEX, 'utf-8');
+    lastmod = lastmodOf(ROOT_INDEX, html);
   } catch {
     lastmod = new Date().toISOString().slice(0, 10);
   }
