@@ -218,7 +218,8 @@ export class PlayScene extends Scene {
       this.combo.break();
       this.missedCoins += result.missed;
       this.scoreManager.recordMiss(result.missed);
-      this.lives = Math.max(0, this.lives - result.missed);
+      // Lose one heart for every 10 missed coins; 5 hearts means 50 misses ends the run.
+      this.lives = Math.max(0, MAX_LIVES - Math.floor(this.missedCoins / 10));
       this.soundManager.play("lifeLost");
       this.screenShake.trigger(8, 0.3);
       this.particles.lifeLost(this.player.rect.centerX, this.player.rect.top);

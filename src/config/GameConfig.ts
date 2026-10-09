@@ -52,7 +52,7 @@ export const COIN_TYPES: CoinTypeConfig[] = [
   },
 ];
 
-export const MAX_LIVES = 3;
+export const MAX_LIVES = 5;
 export const GAME_DURATION = 60;
 export const COIN_SCORE_VALUE = 10;
 
