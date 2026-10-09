@@ -42,8 +42,8 @@ export class ScoreManager {
     this.eventBus.emit(EVT_SCORE_CHANGED, { score: this.score });
   }
 
-  public recordMiss(): void {
-    this.coinsMissed++;
+  public recordMiss(count: number = 1): void {
+    this.coinsMissed += Math.max(0, Math.floor(count));
   }
 
   public setMaxCombo(combo: number): void {

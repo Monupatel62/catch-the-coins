@@ -4,7 +4,7 @@ import { GAME_WIDTH, GAME_HEIGHT } from "../config/GameConfig";
 
 export interface GameOverOverlayState {
   result: GameResult | null;
-  cause: "time" | "lives";
+  cause: "misses";
   inputReady?: boolean;
 }
 
@@ -35,8 +35,8 @@ export class GameOverOverlay {
 
     // Card border
     ctx.save();
-    const heading = state.cause === "lives" ? "OUT OF LIVES!" : "TIME'S UP!";
-    const accentColor = state.cause === "lives" ? "#ff6b6b" : "#ffd93d";
+    const heading = "50 COINS MISSED!";
+    const accentColor = "#ff6b6b";
     const bgrad = ctx.createLinearGradient(cardX, cardY, cardX + cardW, cardY + cardH);
     bgrad.addColorStop(0, accentColor);
     bgrad.addColorStop(1, "rgba(255,255,255,0.08)");
@@ -51,9 +51,7 @@ export class GameOverOverlay {
     ctx.save();
     ctx.beginPath();
     this.roundRect(ctx, cardX, cardY, cardW, 52, 20);
-    ctx.fillStyle = state.cause === "lives"
-      ? "rgba(239,68,68,0.22)"
-      : "rgba(250,204,21,0.18)";
+    ctx.fillStyle = "rgba(239,68,68,0.22)";
     ctx.fill();
     ctx.restore();
 

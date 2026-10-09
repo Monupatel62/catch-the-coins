@@ -15,7 +15,7 @@ export class GameOverScene extends Scene {
   private readonly background: BackgroundRenderer;
   private readonly soundManager: SoundManager;
   private result: GameResult | null = null;
-  private cause: GameOverCause = "time";
+  private cause: GameOverCause = "misses";
   private readonly unsubscribeGameOver: () => void;
 
   private inputDelay: number = 0;

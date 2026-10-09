@@ -30,7 +30,7 @@ import {
   GAME_DURATION,
 } from "../config/GameConfig";
 
-export type GameOverCause = "time" | "lives";
+export type GameOverCause = "misses";
 
 export interface GameOverPayload {
   result: ReturnType<ScoreManager["finishGame"]>;
@@ -54,7 +54,9 @@ export class PlayScene extends Scene {
   private readonly stageAnnouncement: StageAnnouncement;
   private readonly mobileControls: MobileControls;
   private readonly eventBus: EventBus;
+  private static readonly MISSES_TO_GAME_OVER = 50;
   private lives: number = MAX_LIVES;
+  private missedCoins: number = 0;
   private timeLeft: number = GAME_DURATION;
   private elapsed: number = 0;
   private gameOverFired: boolean = false;
@@ -98,6 +100,7 @@ export class PlayScene extends Scene {
     this.floatingText.clear();
     this.stageAnnouncement.clear();
     this.lives = MAX_LIVES;
+    this.missedCoins = 0;
     this.timeLeft = GAME_DURATION;
     this.elapsed = 0;
     this.gameOverFired = false;
@@ -213,14 +216,14 @@ export class PlayScene extends Scene {
 
     if (result.missed > 0) {
       this.combo.break();
-      this.scoreManager.recordMiss();
-      this.lives -= result.missed;
+      this.missedCoins += result.missed;
+      this.scoreManager.recordMiss(result.missed);
+      this.lives = Math.max(0, this.lives - result.missed);
       this.soundManager.play("lifeLost");
       this.screenShake.trigger(8, 0.3);
       this.particles.lifeLost(this.player.rect.centerX, this.player.rect.top);
-      if (this.lives <= 0) {
-        this.lives = 0;
-        this.handleGameOver("lives");
+      if (this.missedCoins >= PlayScene.MISSES_TO_GAME_OVER) {
+        this.handleGameOver("misses");
         return;
       }
     }
@@ -231,9 +234,7 @@ export class PlayScene extends Scene {
     this.elapsed += deltaTime;
     this.timeLeft = Math.max(0, GAME_DURATION - Math.floor(this.elapsed));
 
-    if (this.timeLeft <= 0) {
-      this.handleGameOver("time");
-    }
+    // The game continues after the timer reaches zero. Only 50 missed coins end the run.
   }
 
   public render(renderer: Renderer): void {
