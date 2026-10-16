@@ -27,7 +27,7 @@ function value(html, pattern) {
 
 for (const file of [...new Set(htmlFiles)]) {
   const html = readFileSync(file, 'utf8');
-  const name = relative(root, file).replaceAll('\\\\', '/');
+  const name = relative(root, file).replaceAll('\\', '/');
   const title = value(html, /<title\b[^>]*>([\s\S]*?)<\/title>/i);
   const description = value(html, /<meta\b[^>]*name=["']description["'][^>]*content=["']([^"']*)["'][^>]*>/i)
     || value(html, /<meta\b[^>]*content=["']([^"']*)["'][^>]*name=["']description["'][^>]*>/i);
