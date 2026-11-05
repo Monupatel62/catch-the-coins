@@ -1,4 +1,5 @@
 import { Renderer } from "../engine/Renderer";
+import { formatDuration } from "../utils/timeUtils";
 import type { GameResult } from "../managers/ScoreManager";
 import { GAME_WIDTH, GAME_HEIGHT } from "../config/GameConfig";
 
@@ -108,7 +109,7 @@ export class GameOverOverlay {
     }
 
     if (result.isNewBestTime) {
-      this.drawBadge(ctx, GAME_WIDTH / 2, y, `⏱  NEW BEST TIME!  ${result.bestTime.toFixed(1)}s`, "#7dd3fc", "rgba(125,211,252,0.12)");
+      this.drawBadge(ctx, GAME_WIDTH / 2, y, `⏱  NEW BEST TIME!  ${formatDuration(result.bestTime)}`, "#7dd3fc", "rgba(125,211,252,0.12)");
       y += 36;
     }
 
@@ -126,7 +127,7 @@ export class GameOverOverlay {
         color: "#a78bfa",
       },
       { label: "COMBO", value: `×${result.maxCombo}`, color: "#fb923c" },
-      { label: "TIME", value: `${result.timeSurvived.toFixed(1)}s`, color: "#7dd3fc" },
+      { label: "TIME", value: formatDuration(result.timeSurvived), color: "#7dd3fc" },
     ];
 
     const colW = cardW / statItems.length;

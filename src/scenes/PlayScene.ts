@@ -27,7 +27,6 @@ import {
   PLAYER_WIDTH,
   PLAYER_HEIGHT,
   MAX_LIVES,
-  GAME_DURATION,
 } from "../config/GameConfig";
 
 export type GameOverCause = "misses";
@@ -57,10 +56,8 @@ export class PlayScene extends Scene {
   private static readonly MISSES_TO_GAME_OVER = 50;
   private lives: number = MAX_LIVES;
   private missedCoins: number = 0;
-  private timeLeft: number = GAME_DURATION;
   private elapsed: number = 0;
   private gameOverFired: boolean = false;
-  private survivalAnnounced: boolean = false;
 
   /** Pause automatically when the tab is hidden so coins don't keep counting against the player. */
   private readonly onVisibilityChange = (): void => {
@@ -110,10 +107,8 @@ export class PlayScene extends Scene {
     this.stageAnnouncement.clear();
     this.lives = MAX_LIVES;
     this.missedCoins = 0;
-    this.timeLeft = GAME_DURATION;
     this.elapsed = 0;
     this.gameOverFired = false;
-    this.survivalAnnounced = false;
     document.addEventListener("visibilitychange", this.onVisibilityChange);
     this.soundManager.startMusic();
   }
@@ -244,16 +239,8 @@ export class PlayScene extends Scene {
     this.particles.update(deltaTime);
     this.floatingText.update(deltaTime);
 
+    // No time limit: the clock just counts up. Only 50 missed coins end the run.
     this.elapsed += deltaTime;
-    this.timeLeft = Math.max(0, GAME_DURATION - Math.floor(this.elapsed));
-
-    // The game continues after the timer reaches zero. Only 50 missed coins end the run.
-    // Tell the player once, so a timer sitting at 0 doesn't look like a bug.
-    if (this.timeLeft === 0 && !this.survivalAnnounced) {
-      this.survivalAnnounced = true;
-      this.stageAnnouncement.show("Survival Mode");
-      this.soundManager.play("stageUp");
-    }
   }
 
   public render(renderer: Renderer): void {
@@ -278,7 +265,6 @@ export class PlayScene extends Scene {
       score: this.scoreManager.getScore(),
       highScore: this.scoreManager.getHighScore(),
       lives: this.lives,
-      timeLeft: this.timeLeft,
       elapsed: this.elapsed,
       difficultyStage: this.difficulty.getStageName(),
       stageProgress: this.difficulty.getStageProgress(),
