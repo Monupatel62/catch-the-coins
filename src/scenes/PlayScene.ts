@@ -60,6 +60,15 @@ export class PlayScene extends Scene {
   private timeLeft: number = GAME_DURATION;
   private elapsed: number = 0;
   private gameOverFired: boolean = false;
+  private survivalAnnounced: boolean = false;
+
+  /** Pause automatically when the tab is hidden so coins don't keep counting against the player. */
+  private readonly onVisibilityChange = (): void => {
+    if (document.hidden && this.stateManager.isPlaying() && !this.gameOverFired) {
+      this.stateManager.setState("PAUSED");
+      this.soundManager.stopMusic();
+    }
+  };
 
   constructor(eventBus: EventBus, soundManager: SoundManager) {
     super();
@@ -104,10 +113,13 @@ export class PlayScene extends Scene {
     this.timeLeft = GAME_DURATION;
     this.elapsed = 0;
     this.gameOverFired = false;
+    this.survivalAnnounced = false;
+    document.addEventListener("visibilitychange", this.onVisibilityChange);
     this.soundManager.startMusic();
   }
 
   public exit(): void {
+    document.removeEventListener("visibilitychange", this.onVisibilityChange);
     this.soundManager.stopMusic();
     // Show ads again when leaving play scene (game over / back to menu)
     showAds();
@@ -236,6 +248,12 @@ export class PlayScene extends Scene {
     this.timeLeft = Math.max(0, GAME_DURATION - Math.floor(this.elapsed));
 
     // The game continues after the timer reaches zero. Only 50 missed coins end the run.
+    // Tell the player once, so a timer sitting at 0 doesn't look like a bug.
+    if (this.timeLeft === 0 && !this.survivalAnnounced) {
+      this.survivalAnnounced = true;
+      this.stageAnnouncement.show("Survival Mode");
+      this.soundManager.play("stageUp");
+    }
   }
 
   public render(renderer: Renderer): void {
@@ -261,6 +279,7 @@ export class PlayScene extends Scene {
       highScore: this.scoreManager.getHighScore(),
       lives: this.lives,
       timeLeft: this.timeLeft,
+      elapsed: this.elapsed,
       difficultyStage: this.difficulty.getStageName(),
       stageProgress: this.difficulty.getStageProgress(),
       combo: this.combo.getCombo(),

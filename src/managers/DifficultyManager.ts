@@ -57,6 +57,10 @@ export class DifficultyManager {
   }
 
   public getStageProgress(): number {
+    // Last stage never advances, so keep its bar full instead of wrapping back to empty.
+    if (this.elapsed >= DIFFICULTY_STAGE_DURATION * DIFFICULTY_STAGES.length) {
+      return 1;
+    }
     const stageElapsed = this.elapsed % DIFFICULTY_STAGE_DURATION;
     return stageElapsed / DIFFICULTY_STAGE_DURATION;
   }

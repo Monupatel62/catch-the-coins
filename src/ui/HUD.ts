@@ -6,6 +6,8 @@ export interface HUDState {
   highScore: number;
   lives: number;
   timeLeft: number;
+  /** Seconds of play so far (keeps counting after the countdown reaches 0). */
+  elapsed: number;
   difficultyStage: string;
   stageProgress: number;
   combo: number;
@@ -62,9 +64,15 @@ export class HUD {
     ctx.restore();
 
     // ── CENTER: Timer ─────────────────────────────────────────
-    const timerColor = state.timeLeft <= 10
-      ? (Math.floor(Date.now() / 350) % 2 === 0 ? "#ff6b6b" : "#ff9999")   // blink when low
-      : "#ffd93d";
+    // The countdown runs 60s -> 0s. The run does NOT end at 0 (only 50 misses do), so after
+    // that the panel switches to a count-up of survived time instead of sticking on "0s".
+    const survival = state.timeLeft <= 0;
+    const urgent = !survival && state.timeLeft <= 10;
+    const timerColor = survival
+      ? "#4ade80"
+      : urgent
+        ? (Math.floor(Date.now() / 350) % 2 === 0 ? "#ff6b6b" : "#ff9999")   // blink when low
+        : "#ffd93d";
 
     this.drawPanel(ctx, GAME_WIDTH / 2 - 70, 6, 140, 58);
 
@@ -73,14 +81,18 @@ export class HUD {
     ctx.textBaseline = "alphabetic";
     ctx.font = "bold 11px Arial";
     ctx.fillStyle = "rgba(255,255,255,0.45)";
-    ctx.fillText("TIME", GAME_WIDTH / 2, 22);
+    ctx.fillText(survival ? "SURVIVED" : "TIME", GAME_WIDTH / 2, 22);
     ctx.font = `bold 28px Arial`;
     ctx.fillStyle = timerColor;
-    if (state.timeLeft <= 10) {
+    if (urgent) {
       ctx.shadowColor = "#ff6b6b";
       ctx.shadowBlur = 12;
     }
-    ctx.fillText(`${state.timeLeft}s`, GAME_WIDTH / 2, 52);
+    ctx.fillText(
+      survival ? this.formatClock(state.elapsed) : `${state.timeLeft}s`,
+      GAME_WIDTH / 2,
+      52,
+    );
     ctx.shadowBlur = 0;
     ctx.restore();
 
@@ -88,10 +100,10 @@ export class HUD {
     const barW = 120;
     const barX = GAME_WIDTH / 2 - barW / 2;
     const barY = 63;
-    const progress = Math.min(1, state.timeLeft / GAME_DURATION);
+    const progress = survival ? 1 : Math.min(1, state.timeLeft / GAME_DURATION);
     ctx.fillStyle = "rgba(255,255,255,0.1)";
     this.roundRectFill(ctx, barX, barY, barW, 4, 2);
-    const barColor = state.timeLeft <= 10 ? "#ff6b6b" : "#ffd93d";
+    const barColor = survival ? "#4ade80" : urgent ? "#ff6b6b" : "#ffd93d";
     ctx.fillStyle = barColor;
     this.roundRectFill(ctx, barX, barY, barW * progress, 4, 2);
 
@@ -182,6 +194,14 @@ export class HUD {
     ctx.lineWidth = 1;
     ctx.stroke();
     ctx.restore();
+  }
+
+  /** Seconds -> "m:ss" (e.g. 65 -> "1:05"). */
+  private formatClock(totalSeconds: number): string {
+    const s = Math.max(0, Math.floor(totalSeconds));
+    const minutes = Math.floor(s / 60);
+    const seconds = s % 60;
+    return `${minutes}:${seconds.toString().padStart(2, "0")}`;
   }
 
   private buildHearts(lives: number): string {
