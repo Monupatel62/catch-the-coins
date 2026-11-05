@@ -15,6 +15,7 @@ import { FloatingTextManager } from "../effects/FloatingTextManager";
 import { ScreenShake } from "../effects/ScreenShake";
 import { StageAnnouncement } from "../effects/StageAnnouncement";
 import { hideAds, showAds } from "../main";
+import { trackEvent } from "../utils/analytics";
 import { HUD } from "../ui/HUD";
 import { PauseOverlay } from "../ui/PauseOverlay";
 import { MobileControls } from "../ui/MobileControls";
@@ -111,6 +112,7 @@ export class PlayScene extends Scene {
     this.gameOverFired = false;
     document.addEventListener("visibilitychange", this.onVisibilityChange);
     this.soundManager.startMusic();
+    trackEvent("game_start");
   }
 
   public exit(): void {
@@ -191,6 +193,7 @@ export class PlayScene extends Scene {
     if (this.difficulty.checkAndAcknowledgeStageChange()) {
       this.stageAnnouncement.show(this.difficulty.getStageName());
       this.soundManager.play("stageUp");
+      trackEvent("stage_reached", { stage: this.difficulty.getStageName() });
     }
 
     this.spawnManager.update(deltaTime);
@@ -301,6 +304,15 @@ export class PlayScene extends Scene {
     this.gameOverFired = true;
 
     const result = this.scoreManager.finishGame(this.elapsed);
+    trackEvent("game_over", {
+      score: result.score,
+      survival_seconds: Math.round(result.timeSurvived),
+      max_combo: result.maxCombo,
+      coins_caught: result.coinsCaught,
+      coins_missed: result.coinsMissed,
+      new_high_score: result.isNewHighScore,
+      cause,
+    });
     this.soundManager.play("gameOver");
     this.screenShake.trigger(12, 0.4);
     this.particles.gameOver(this.player.rect.centerX, this.player.rect.centerY);
