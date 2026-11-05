@@ -387,6 +387,29 @@ canvas {
   text-decoration: underline;
 }
 
+.guide-list {
+  list-style: none;
+  margin: 0 0 14px;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 8px 20px;
+  text-align: left;
+}
+
+.guide-list a {
+  color: #94a3b8;
+  font-size: 0.88rem;
+  line-height: 1.5;
+  text-decoration: none;
+}
+
+.guide-list a:hover,
+.guide-list a:focus {
+  color: #4ade80;
+  text-decoration: underline;
+}
+
 /* ═══════════════════════════════════════════════════════════════════════════
    FAQ SECTION
 ═══════════════════════════════════════════════════════════════════════════ */
