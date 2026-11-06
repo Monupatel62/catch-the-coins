@@ -17,8 +17,6 @@ import { fileURLToPath } from 'url';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const PUBLIC_DIR = resolve(__dirname, '../public');
-const BLOG_DIR = join(PUBLIC_DIR, 'blog');
-const ES_DIR = join(PUBLIC_DIR, 'es');
 const SITEMAP_PATH = join(PUBLIC_DIR, 'sitemap.xml');
 const BASE_URL = 'https://catchthecoins.netlify.app';
 
@@ -59,6 +57,7 @@ function rankOf(urlPath) {
     return { priority: '0.9', changefreq: 'weekly' };
   if (urlPath.startsWith('/blog/')) return { priority: '0.8', changefreq: 'monthly' };
   if (urlPath === '/about.html') return { priority: '0.8', changefreq: 'monthly' };
+  if (urlPath === '/coin-catcher-game/') return { priority: '0.9', changefreq: 'weekly' };
   if (urlPath === '/es/') return { priority: '0.7', changefreq: 'monthly' };
   if (urlPath === '/privacy.html' || urlPath === '/terms.html')
     return { priority: '0.4', changefreq: 'monthly' };
