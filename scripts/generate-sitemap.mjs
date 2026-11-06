@@ -17,8 +17,6 @@ import { fileURLToPath } from 'url';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const PUBLIC_DIR = resolve(__dirname, '../public');
-const BLOG_DIR = join(PUBLIC_DIR, 'blog');
-const ES_DIR = join(PUBLIC_DIR, 'es');
 const SITEMAP_PATH = join(PUBLIC_DIR, 'sitemap.xml');
 const BASE_URL = 'https://catchthecoins.netlify.app';
 
@@ -59,35 +57,31 @@ function rankOf(urlPath) {
     return { priority: '0.9', changefreq: 'weekly' };
   if (urlPath.startsWith('/blog/')) return { priority: '0.8', changefreq: 'monthly' };
   if (urlPath === '/about.html') return { priority: '0.8', changefreq: 'monthly' };
+  if (urlPath === '/coin-catcher-game/') return { priority: '0.9', changefreq: 'weekly' };
   if (urlPath === '/es/') return { priority: '0.7', changefreq: 'monthly' };
   if (urlPath === '/privacy.html' || urlPath === '/terms.html')
     return { priority: '0.4', changefreq: 'monthly' };
   return { priority: '0.6', changefreq: 'monthly' };
 }
 
-/** Collect every indexable HTML file under public/ (top level + blog/). */
+/** Collect every indexable HTML file under public/, including nested landing-page directories. */
 function collectHtmlFiles() {
   const files = [];
-  const pushDir = (dir, relPrefix) => {
-    for (const name of readdirSync(dir)) {
-      if (!name.endsWith('.html')) continue;
-      const rel = relPrefix ? `${relPrefix}/${name}` : name;
-      if (EXCLUDE.has(rel)) continue;
-      if (isVerificationFile(rel)) continue;
-      files.push({ abs: join(dir, name), rel });
+  const walk = (dir, relPrefix = '') => {
+    for (const entry of readdirSync(dir, { withFileTypes: true })) {
+      if (entry.isDirectory()) {
+        // Ignore internal snapshots and hidden build/control directories.
+        if (entry.name.startsWith('.') || entry.name === 'node_modules') continue;
+        walk(join(dir, entry.name), relPrefix ? `${relPrefix}/${entry.name}` : entry.name);
+        continue;
+      }
+      if (!entry.isFile() || !entry.name.endsWith('.html')) continue;
+      const rel = relPrefix ? `${relPrefix}/${entry.name}` : entry.name;
+      if (EXCLUDE.has(rel) || isVerificationFile(rel)) continue;
+      files.push({ abs: join(dir, entry.name), rel });
     }
   };
-  pushDir(PUBLIC_DIR, '');
-  try {
-    pushDir(BLOG_DIR, 'blog');
-  } catch {
-    /* no blog dir — fine */
-  }
-  try {
-    pushDir(ES_DIR, 'es');
-  } catch {
-    /* no es dir — fine */
-  }
+  walk(PUBLIC_DIR);
   return files;
 }
 
