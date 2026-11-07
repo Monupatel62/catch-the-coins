@@ -740,3 +740,83 @@ body.game-playing > ins {
   visibility: hidden !important;
   opacity: 0 !important;
 }
+
+
+/* Mobile layout refinements */
+@media (max-width: 600px) {
+  .nav-inner {
+    height: auto;
+    min-height: 54px;
+    padding: 9px 12px 7px;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  .nav-logo { min-height: 36px; }
+  .nav-links {
+    order: 3;
+    flex: 0 0 100%;
+    width: 100%;
+    justify-content: space-between;
+    gap: 2px;
+    overflow-x: auto;
+    scrollbar-width: none;
+    padding-bottom: 2px;
+  }
+  .nav-links::-webkit-scrollbar { display: none; }
+  .nav-link {
+    padding: 7px 8px;
+    font-size: 0.76rem;
+  }
+  .nav-install-btn {
+    margin-left: auto;
+    padding: 7px 11px;
+    font-size: 0.76rem;
+  }
+
+  .game-section {
+    min-height: min(68svh, 620px);
+    padding: 8px 8px 4px;
+  }
+  #app {
+    min-width: 0;
+    width: 100%;
+    overflow: hidden;
+  }
+  canvas {
+    width: min(calc(100vw - 20px), calc((100svh - 190px) * 1.333333)) !important;
+    height: auto !important;
+    max-width: 100%;
+    max-height: calc(100svh - 190px);
+    aspect-ratio: 4 / 3;
+  }
+  .features-section, .info-section, .faq-section {
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+  .features-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .feature-card { padding: 14px 12px; }
+  .info-inner { padding: 18px 14px; }
+  .section-title { font-size: 1.05rem; line-height: 1.35; }
+  .controls-row { gap: 10px 14px; }
+  .guide-list { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 360px) {
+  .nav-link { font-size: 0.70rem; padding: 7px 5px; }
+  .nav-logo-text { font-size: 0.88rem; }
+  .features-grid { grid-template-columns: 1fr; }
+}
+
+/* Short landscape phones: keep the playable area visible */
+@media (max-height: 520px) and (orientation: landscape) {
+  .nav-inner { min-height: 42px; padding-top: 4px; padding-bottom: 4px; }
+  .nav-links { flex: 1; order: initial; width: auto; }
+  .game-section { min-height: calc(100svh - 58px); padding: 2px 6px; }
+  canvas {
+    width: min(calc(100vw - 16px), calc((100svh - 70px) * 1.333333)) !important;
+    max-height: calc(100svh - 70px);
+  }
+}
