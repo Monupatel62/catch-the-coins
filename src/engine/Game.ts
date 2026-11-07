@@ -16,6 +16,7 @@ export class Game {
   private readonly eventBus: EventBus;
   private readonly debugOverlay: DebugOverlay;
   private readonly canvas: HTMLCanvasElement;
+  private readonly resizeObserver: ResizeObserver;
   private debugMode: boolean = false;
 
   constructor(canvas: HTMLCanvasElement) {
@@ -31,6 +32,8 @@ export class Game {
     this.debugOverlay = new DebugOverlay();
     this.gameLoop = new GameLoop(this.update, this.render, FIXED_DELTA_TIME);
 
+    this.resizeObserver = new ResizeObserver(this.handleResize);
+    this.resizeObserver.observe(canvas.parentElement ?? canvas);
     window.addEventListener("resize", this.handleResize);
     window.addEventListener("orientationchange", this.handleResize);
     document.addEventListener("fullscreenchange", this.handleResize);
@@ -60,6 +63,7 @@ export class Game {
 
   public stop(): void {
     this.gameLoop.stop();
+    this.resizeObserver.disconnect();
     window.removeEventListener("resize", this.handleResize);
     window.removeEventListener("orientationchange", this.handleResize);
     document.removeEventListener("fullscreenchange", this.handleResize);
@@ -73,44 +77,33 @@ export class Game {
 
   private handleResize = (): void => {
     const isFullscreen = !!document.fullscreenElement;
+    const host = this.canvas.parentElement;
+    const hostRect = host?.getBoundingClientRect();
 
-    let availW: number;
-    let availH: number;
+    // Use the actual game container, not the top-level window. This also
+    // handles the game when it is embedded in the Coin Catcher landing page.
+    const availW = Math.max(0, isFullscreen ? window.innerWidth : (hostRect?.width ?? window.innerWidth));
+    const availH = Math.max(0, isFullscreen ? window.innerHeight : (hostRect?.height ?? window.innerHeight));
 
-    if (isFullscreen) {
-      availW = window.innerWidth;
-      availH = window.innerHeight;
-    } else {
-      const footerEl = document.querySelector(".site-footer") as HTMLElement | null;
-      const adEl     = document.querySelector(".ad-container") as HTMLElement | null;
-      const footerH  = footerEl ? footerEl.offsetHeight : 0;
-      const adH      = adEl     ? adEl.offsetHeight     : 0;
-      availW = window.innerWidth;
-      availH = window.innerHeight - footerH - adH - 4;
-    }
-
-    // Internal resolution stays 800×600 always — game logic never changes
-    this.canvas.width  = GAME_WIDTH;
+    this.canvas.width = GAME_WIDTH;
     this.canvas.height = GAME_HEIGHT;
     this.renderer.resize(GAME_WIDTH, GAME_HEIGHT);
 
+    const scale = Math.min(availW / GAME_WIDTH, availH / GAME_HEIGHT);
+    const drawW = Math.max(1, Math.floor(GAME_WIDTH * scale));
+    const drawH = Math.max(1, Math.floor(GAME_HEIGHT * scale));
+
+    this.canvas.style.width = `${drawW}px`;
+    this.canvas.style.height = `${drawH}px`;
+
     if (isFullscreen) {
-      // Fullscreen: fill entire screen — stretch to fit, no black bars
-      this.canvas.style.width  = `${availW}px`;
-      this.canvas.style.height = `${availH}px`;
       this.canvas.style.position = "fixed";
-      this.canvas.style.top  = "0";
+      this.canvas.style.top = "0";
       this.canvas.style.left = "0";
     } else {
-      // Normal mode: fit within available space keeping aspect ratio
-      const scale  = Math.min(availW / GAME_WIDTH, availH / GAME_HEIGHT);
-      const drawW  = Math.round(GAME_WIDTH  * scale);
-      const drawH  = Math.round(GAME_HEIGHT * scale);
-      this.canvas.style.width    = `${drawW}px`;
-      this.canvas.style.height   = `${drawH}px`;
-      this.canvas.style.position = "";
-      this.canvas.style.top      = "";
-      this.canvas.style.left     = "";
+      this.canvas.style.position = "relative";
+      this.canvas.style.top = "";
+      this.canvas.style.left = "";
     }
   };
 
